@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import { pink100 } from 'material-ui/styles/colors';
 
 export class Success extends Component {
 
