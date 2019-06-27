@@ -44,13 +44,13 @@ export class FormPersonalDetails extends Component {
                     <RaisedButton 
                         label="Continue"
                         primary={true}
-                        style={StyleSheet.button}
+                        style={style.button}
                         onClick={this.continue}
                     />
                     <RaisedButton 
                         label="Back"
                         primary={false}
-                        style={StyleSheet.button}
+                        style={style.button}
                         onClick={this.back}
                     />
                 </React.Fragment>
