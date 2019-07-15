@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import { prev, next } from '../actions';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
@@ -8,7 +10,7 @@ export class FormUserDetails extends Component {
 
     continue = (e) => {
         e.preventDefault();
-        this.props.nextStep();
+        this.props.next();
     }
     render() {
         const {values, handleChange} = this.props;
@@ -57,4 +59,4 @@ const style = {
     }
 }
 
-export default FormUserDetails;
+export default connect(null,{next})(FormUserDetails);

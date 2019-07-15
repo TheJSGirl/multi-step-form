@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import FormUserDetails from './FormUserDetails';
 import FormPersonalDetails from './FormPersonalDetails';
 import Confirm from './Confirm';
@@ -14,22 +15,22 @@ export class UserForm extends Component {
         bio: ''
     }
 
-    //Proceed to next step
-    nextStep = () => {
-        const {step} = this.state;
-        this.setState({
-            step: step + 1
-        })
-    }
+    // //Proceed to next step
+    // nextStep = () => {
+    //     const {step} = this.state;
+    //     this.setState({
+    //         step: step + 1
+    //     })
+    // }
 
-    //GO back to previous step
+    // //GO back to previous step
 
-    prevStep = () => {
-        const {step} = this.state;
-        this.setState({
-            step: step - 1
-        })
-    }
+    // prevStep = () => {
+    //     const {step} = this.state;
+    //     this.setState({
+    //         step: step - 1
+    //     })
+    // }
 
     // Handle fields change
     handleChange = input => e => {
@@ -38,6 +39,7 @@ export class UserForm extends Component {
     }
 
     render() {
+        console.log(this.props.data)
         const {step} = this.state;
         const {firstName, lastName, city, bio, email, occupation} = this.state;
         const values = {firstName, lastName, city, bio, email, occupation}; 
@@ -45,7 +47,6 @@ export class UserForm extends Component {
             case 1:
             return (
                 <FormUserDetails 
-                    nextStep = {this.nextStep}
                     handleChange= {this.handleChange}
                     values = {values}
                 />
@@ -73,4 +74,8 @@ export class UserForm extends Component {
     }
 }
 
-export default UserForm;
+function mapStateToProps(state) {
+    console.log('prop data', state)
+    return state;
+}
+export default connect(null)(UserForm);
