@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import FormUserDetails from './FormUserDetails';
 import FormPersonalDetails from './FormPersonalDetails';
+import {prev, next, increment} from '../actions/index';
 import Confirm from './Confirm';
 import Success from './Success';
 export class UserForm extends Component {
@@ -15,38 +16,22 @@ export class UserForm extends Component {
         bio: ''
     }
 
-    // //Proceed to next step
-    // nextStep = () => {
-    //     const {step} = this.state;
-    //     this.setState({
-    //         step: step + 1
-    //     })
-    // }
 
-    // //GO back to previous step
-
-    // prevStep = () => {
-    //     const {step} = this.state;
-    //     this.setState({
-    //         step: step - 1
-    //     })
-    // }
-
-    // Handle fields change
     handleChange = input => e => {
         this.setState({[input]: e.target.value})
 
     }
 
     render() {
-        console.log(this.props.data)
-        const {step} = this.state;
-        const {firstName, lastName, city, bio, email, occupation} = this.state;
+        
+        const {firstName, lastName, city, bio, email, occupation, step} = this.props.root;
+        const {prev, next} = this.props
         const values = {firstName, lastName, city, bio, email, occupation}; 
         switch(step) {
             case 1:
             return (
                 <FormUserDetails 
+                    nextStep = {next}
                     handleChange= {this.handleChange}
                     values = {values}
                 />
@@ -54,18 +39,18 @@ export class UserForm extends Component {
             case 2: 
                 return (
                     <FormPersonalDetails 
-                        nextStep = {this.nextStep}
+                        nextStep = {next}
                         handleChange={this.handleChange}
                         values = {values}
-                        prevStep = {this.prevStep}
+                        prevStep = {prev}
                     />
                 )
             case 3: 
                 return (
                     <Confirm 
                         values={values}
-                        prevStep = {this.prevStep}
-                        nextStep = {this.nextStep}
+                        prevStep = {prev}
+                        nextStep = {next}
                      />
                 )
             case 4: 
@@ -74,8 +59,7 @@ export class UserForm extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    console.log('prop data', state)
-    return state;
+function mapStateToProps({data}) {
+    return data;
 }
-export default connect(null)(UserForm);
+export default connect(mapStateToProps, {prev, next, increment})(UserForm);
